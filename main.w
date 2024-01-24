@@ -21,17 +21,20 @@ let bucket = new cloud.Bucket();
 bucket.onCreate(inflight () => {
   log("File in bucket created");
   let token = githubToken.value();
+  log("Token: {token}");
   let owner = "winglang";
   let repo = "examples";
-  let workflowId = "wing-sdk.yml";
-  let result = http.post("https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches",
+  let result = http.post("https://api.github.com/repos/${owner}/${repo}/dispatches",
     headers: {
-      "Authorization": "token ${token}",
-      "Accept": "application/vnd.github.v3+json",
+      "Authorization": "Bearer ${token}",
+      "Accept": "application/vnd.github+json",
       "X-GitHub-Api-Version": "2022-11-28",
     },
     body: Json.stringify({
-      "ref": "main",
+      "event_type": "feedreader",
+      "client_payload": {
+        "branch": "main"
+      }
     }),
   );
 
