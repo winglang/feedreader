@@ -23,7 +23,7 @@ bucket.onCreate(inflight () => {
   let owner = "winglang";
   let repo = "examples";
   log("Triggering run in https://github.com/{owner}/{repo}");
-  let result = http.post("https://api.github.com/repos/${owner}/${repo}/dispatches",
+  let result = http.post("https://api.github.com/repos/{owner}/{repo}/dispatches",
     headers: {
       "Authorization": "Bearer {token}",
       "Accept": "application/vnd.github+json",
