@@ -19,29 +19,26 @@ let githubToken = new cloud.Secret(name: "github-token");
 let bucket = new cloud.Bucket();
 
 bucket.onCreate(inflight () => {
-  log("File in bucket created");
   let token = githubToken.value();
-  log("Token: {token}");
   let owner = "winglang";
   let repo = "examples";
+  log("Triggering run in https://github.com/{owner}/{repo}");
   let result = http.post("https://api.github.com/repos/${owner}/${repo}/dispatches",
     headers: {
-      "Authorization": "Bearer ${token}",
+      "Authorization": "Bearer {token}",
       "Accept": "application/vnd.github+json",
       "X-GitHub-Api-Version": "2022-11-28",
     },
     body: Json.stringify({
       "event_type": "feedreader",
-      "client_payload": {
-        "branch": "main"
-      }
+      "client_payload": {}
     }),
   );
 
   log("Result: ${result.ok} ${result.status} ${result.body}");
 });
 
-// This cron schedule runs every minute
+// This cron schedule runs every 2 minutes
 let schedule = new cloud.Schedule(cron: "0/2 * ? * *");
 
 let scheduleHandler = inflight () => {
