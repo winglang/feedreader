@@ -32,9 +32,7 @@ bucket.onCreate(inflight () => {
     },
     body: Json.stringify({
       "event_type": "feedreader",
-      "client_payload": {
-        "branch": "main"
-      }
+      "client_payload": {}
     }),
   );
 
