@@ -26,7 +26,7 @@ bucket.onCreate(inflight () => {
   let repo = "examples";
   let result = http.post("https://api.github.com/repos/${owner}/${repo}/dispatches",
     headers: {
-      "Authorization": "Bearer ${token}",
+      "Authorization": "Bearer {token}",
       "Accept": "application/vnd.github+json",
       "X-GitHub-Api-Version": "2022-11-28",
     },
