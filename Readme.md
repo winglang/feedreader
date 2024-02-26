@@ -14,3 +14,5 @@ This is an example of a WingLang project that demonstrates the usage of cloud se
 
 ![workflow](./workflow.png)
 
+This is used in the [examples](https://github.com/winglang/examples/blob/main/docs/testing-new-wing-versions.md) repository.
+
